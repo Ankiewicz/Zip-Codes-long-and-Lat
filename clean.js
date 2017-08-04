@@ -11,7 +11,7 @@ MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   console.log("Connected correctly to server");
   var collection = db.collection('zipLongLat');
-    fs.readFile('2015_Gaz_counties_national.txt', "utf8", (err, data) => {
+    fs.readFile('2015_Gaz_zcta_national.txt', "utf8", (err, data) => {
       if (err) throw err;
     	let libraryOfZipzLongLat = data.split('\n')
     	  for (var i = 0; i <= libraryOfZipzLongLat.length; i++) {
@@ -20,11 +20,9 @@ MongoClient.connect(url, function(err, db) {
           }
             console.log('val =', val, typeof val)
                var obj = {
-                ZIPCODEGEOID: val[1],
-                STATE: val[0],
-                COUNTY: val[3],
-                INTPTLAT: val[8],
-                INTPTLONG: val[9]
+                ZIPCODEGEOID: val[0],
+                INTPTLAT: val[5],
+                INTPTLONG: val[6]
               }
                 collection.insertOne(obj)
                 console.log(obj)
